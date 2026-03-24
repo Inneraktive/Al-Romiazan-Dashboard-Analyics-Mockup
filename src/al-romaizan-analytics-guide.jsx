@@ -5,7 +5,7 @@ import {
   ResponsiveContainer, ComposedChart
 } from "recharts";
 import RevenueOverview from "./components/RevenueOverview";
-import BranchComparison from "./components/BranchComparison";
+
 
 /* ── Design Tokens (Figma) ── */
 const C = {
@@ -94,16 +94,16 @@ const revForecastData = (() => {
   });
 })();
 const paymentData = {
-  "2026": [{name:"Cash",pct:42,revenue:937260},{name:"Card",pct:31,revenue:691530},{name:"Bank Transfer",pct:18,revenue:401580},{name:"Online",pct:9,revenue:200790}],
-  "2025": [{name:"Cash",pct:46,revenue:812400},{name:"Card",pct:28,revenue:494800},{name:"Bank Transfer",pct:19,revenue:335400},{name:"Online",pct:7,revenue:123600}],
-  "2024": [{name:"Cash",pct:52,revenue:702000},{name:"Card",pct:24,revenue:324000},{name:"Bank Transfer",pct:18,revenue:243000},{name:"Online",pct:6,revenue:81000}],
+  "2026": [{name:"Stripe",pct:48,revenue:1071360},{name:"Tabby",pct:32,revenue:714240},{name:"Amazon",pct:20,revenue:446400}],
+  "2025": [{name:"Stripe",pct:52,revenue:918560},{name:"Tabby",pct:28,revenue:494800},{name:"Amazon",pct:20,revenue:353200}],
+  "2024": [{name:"Stripe",pct:58,revenue:783000},{name:"Tabby",pct:24,revenue:324000},{name:"Amazon",pct:18,revenue:243000}],
 };
-const paymentTrendPct = months.map(m => { const idx=months.indexOf(m), cash=60000+srand()*25000-idx*800, card=45000+srand()*20000+idx*1500; const bank=25000+srand()*15000, online=10000+srand()*10000+idx*800, total=cash+card+bank+online; return { month:m, Cash:Math.round(cash/total*100), Card:Math.round(card/total*100), "Bank Transfer":Math.round(bank/total*100), Online:Math.round(online/total*100) }; });
-const paymentTrendPct2025 = months.map(m => { const idx=months.indexOf(m), cash=65000+srand()*22000-idx*500, card=40000+srand()*18000+idx*1200; const bank=23000+srand()*13000, online=8000+srand()*8000+idx*600, total=cash+card+bank+online; return { month:m, Cash:Math.round(cash/total*100), Card:Math.round(card/total*100), "Bank Transfer":Math.round(bank/total*100), Online:Math.round(online/total*100) }; });
-const paymentTrendPct2024 = months.map(m => { const idx=months.indexOf(m), cash=72000+srand()*20000-idx*300, card=35000+srand()*16000+idx*900; const bank=20000+srand()*11000, online=5000+srand()*6000+idx*400, total=cash+card+bank+online; return { month:m, Cash:Math.round(cash/total*100), Card:Math.round(card/total*100), "Bank Transfer":Math.round(bank/total*100), Online:Math.round(online/total*100) }; });
-const paymentTrendAbs = months.map(m => { const idx=months.indexOf(m); return { month:m, Cash:Math.floor(60000+srand()*25000-idx*800), Card:Math.floor(45000+srand()*20000+idx*1500), "Bank Transfer":Math.floor(25000+srand()*15000), Online:Math.floor(10000+srand()*10000+idx*800) }; });
-const paymentTrendAbs2025 = months.map(m => { const idx=months.indexOf(m); return { month:m, Cash:Math.floor(55000+srand()*22000-idx*500), Card:Math.floor(40000+srand()*18000+idx*1200), "Bank Transfer":Math.floor(23000+srand()*13000), Online:Math.floor(8000+srand()*8000+idx*600) }; });
-const paymentTrendAbs2024 = months.map(m => { const idx=months.indexOf(m); return { month:m, Cash:Math.floor(50000+srand()*20000-idx*300), Card:Math.floor(35000+srand()*16000+idx*900), "Bank Transfer":Math.floor(20000+srand()*11000), Online:Math.floor(5000+srand()*6000+idx*400) }; });
+const paymentTrendPct = months.map(m => { const idx=months.indexOf(m), stripe=60000+srand()*25000-idx*800, tabby=40000+srand()*20000+idx*1500; const amazon=25000+srand()*15000, total=stripe+tabby+amazon; return { month:m, Stripe:Math.round(stripe/total*100), Tabby:Math.round(tabby/total*100), Amazon:Math.round(amazon/total*100) }; });
+const paymentTrendPct2025 = months.map(m => { const idx=months.indexOf(m), stripe=65000+srand()*22000-idx*500, tabby=40000+srand()*18000+idx*1200; const amazon=23000+srand()*13000, total=stripe+tabby+amazon; return { month:m, Stripe:Math.round(stripe/total*100), Tabby:Math.round(tabby/total*100), Amazon:Math.round(amazon/total*100) }; });
+const paymentTrendPct2024 = months.map(m => { const idx=months.indexOf(m), stripe=72000+srand()*20000-idx*300, tabby=35000+srand()*16000+idx*900; const amazon=20000+srand()*11000, total=stripe+tabby+amazon; return { month:m, Stripe:Math.round(stripe/total*100), Tabby:Math.round(tabby/total*100), Amazon:Math.round(amazon/total*100) }; });
+const paymentTrendAbs = months.map(m => { const idx=months.indexOf(m); return { month:m, Stripe:Math.floor(60000+srand()*25000-idx*800), Tabby:Math.floor(40000+srand()*20000+idx*1500), Amazon:Math.floor(25000+srand()*15000) }; });
+const paymentTrendAbs2025 = months.map(m => { const idx=months.indexOf(m); return { month:m, Stripe:Math.floor(55000+srand()*22000-idx*500), Tabby:Math.floor(40000+srand()*18000+idx*1200), Amazon:Math.floor(23000+srand()*13000) }; });
+const paymentTrendAbs2024 = months.map(m => { const idx=months.indexOf(m); return { month:m, Stripe:Math.floor(50000+srand()*20000-idx*300), Tabby:Math.floor(35000+srand()*16000+idx*900), Amazon:Math.floor(20000+srand()*11000) }; });
 const heatmapData = []; for (let d=0;d<7;d++) for (let h=9;h<=22;h++) heatmapData.push({ day:days[d], hour:h, value:Math.floor(srand()*100+(h>16&&h<21?80:10)+(d>=4?40:0)) });
 const heatmapMonthData = []; for (let m=0;m<12;m++) for (let h=9;h<=22;h++) heatmapMonthData.push({ month:months[m], hour:h, value:Math.floor(srand()*100+(h>16&&h<21?80:10)+(m>=9||m<=1?50:0)) });
 const invoiceDistribution = {
@@ -120,9 +120,9 @@ const branchTrend = months.map(m => ({month:m,"Mall of Emirates":40000+srand()*1
 const branchTrend2025 = months.map(m => ({month:m,"Mall of Emirates":36000+srand()*13000,"Dubai Mall":33000+srand()*13000,"Gold Souk":29000+srand()*11000,"Abu Dhabi Mall":22000+srand()*10000,"Sharjah City":20000+srand()*9000,"Ajman Branch":14000+srand()*7000}));
 const branchTrend2024 = months.map(m => ({month:m,"Mall of Emirates":32000+srand()*11000,"Dubai Mall":30000+srand()*11000,"Gold Souk":27000+srand()*10000,"Abu Dhabi Mall":19000+srand()*9000,"Sharjah City":18000+srand()*8000,"Ajman Branch":12000+srand()*6000}));
 const spData = [{name:"Ahmed K.",revenue:185000,invoices:120,atv:1542,customers:89,retention:42},{name:"Fatima R.",revenue:172000,invoices:105,atv:1638,customers:78,retention:51},{name:"Omar S.",revenue:158000,invoices:140,atv:1129,customers:110,retention:38},{name:"Sara M.",revenue:143000,invoices:98,atv:1459,customers:72,retention:45},{name:"Khalid A.",revenue:128000,invoices:115,atv:1113,customers:95,retention:33}];
-const productMix = [{name:"22K Gold",value:38},{name:"21K Gold",value:27},{name:"18K Gold",value:15},{name:"Diamonds",value:12},{name:"Silver",value:8}];
+const productMix = [{name:"24K",value:32},{name:"22K",value:25},{name:"21K",value:18},{name:"18K",value:12},{name:"14K",value:8},{name:"8K",value:5}];
 const pricePerGram = months.map((m,i) => ({month:m,sellingPrice:245+Math.sin(i*0.5)*20+srand()*10,spotPrice:210+Math.sin(i*0.5)*15+srand()*8}));
-const productByBranch = branchData["2026"].slice(0,4).map(b => ({branch:b.name.split(" ")[0],"22K Gold":Math.floor(srand()*40+30),"21K Gold":Math.floor(srand()*25+15),"18K Gold":Math.floor(srand()*15+5),Diamonds:Math.floor(srand()*15+5)}));
+const productByBranch = branchData["2026"].slice(0,4).map(b => ({branch:b.name.split(" ")[0],"24K":Math.floor(srand()*30+25),"22K":Math.floor(srand()*25+18),"21K":Math.floor(srand()*18+10),"18K":Math.floor(srand()*12+5),"14K":Math.floor(srand()*8+3),"8K":Math.floor(srand()*5+2)}));
 const weightTrend = months.map(m => ({month:m,grams:Math.floor(800+srand()*400)}));
 const customerAcq = months.map((m,i) => ({month:m,newCustomers:Math.floor(40+srand()*30),cumulative:200+i*45}));
 const tierData = [{name:"Bronze",value:45,count:2250},{name:"Silver",value:30,count:1500},{name:"Gold",value:18,count:900},{name:"Platinum",value:7,count:350}];
@@ -131,14 +131,14 @@ const retentionCurve = [{month:"M0",all:100,gold:100,silver:100,bronze:100},{mon
 const cancelTrend = months.map(m => ({month:m,rate:(srand()*4+1).toFixed(1),value:Math.floor(srand()*30000+5000)}));
 const campaignData = [{name:"Diwali Sale",lift:28,newCust:85,roi:340,cpa:120},{name:"Eid Collection",lift:22,newCust:62,roi:280,cpa:145},{name:"Summer Promo",lift:15,newCust:44,roi:190,cpa:180},{name:"New Year",lift:18,newCust:55,roi:220,cpa:160}];
 const yoyData = months.map(m => ({month:m,"2025":Math.floor(160000+srand()*60000),"2024":Math.floor(140000+srand()*50000)}));
-const productTrend = months.map(m => ({month:m,"22K Gold":35+srand()*8,"21K Gold":24+srand()*6,"18K Gold":13+srand()*5,Diamonds:10+srand()*5,Silver:6+srand()*4}));
+const productTrend = months.map(m => ({month:m,"24K":30+srand()*8,"22K":23+srand()*6,"21K":16+srand()*5,"18K":12+srand()*4,"14K":8+srand()*3,"8K":4+srand()*3}));
 const revPerSpData = branchData["2026"].map(b => {const sp=Math.floor(srand()*5+2);return {...b, sp, revPerSP:Math.floor(b.revenue/sp)};}).sort((a,b)=>b.revPerSP-a.revPerSP);
 const custSplitData = branchData["2026"].map(b => {const n=Math.floor(srand()*45+15);return {branch:b.name,newPct:n,retPct:100-n};});
 const prodMixData = ["2026","2025","2024"].reduce((acc, year) => {
   acc[year] = branchData[year].map(b => {
-    const v1=Math.floor(srand()*20+28),v2=Math.floor(srand()*12+18),v3=Math.floor(srand()*8+8),v4=Math.floor(srand()*18+5),v5=Math.floor(srand()*8+3);
-    const total=v1+v2+v3+v4+v5; const p1=Math.round((v1/total)*100),p2=Math.round((v2/total)*100),p3=Math.round((v3/total)*100),p4=Math.round((v4/total)*100),p5=100-(p1+p2+p3+p4);
-    return { branch:b.name.length>14?b.name.slice(0,12)+"…":b.name, fullName:b.name, "22K Gold":p1,"21K Gold":p2,"18K Gold":p3,Diamonds:p4,Silver:p5 };
+    const v1=Math.floor(srand()*18+24),v2=Math.floor(srand()*15+18),v3=Math.floor(srand()*12+12),v4=Math.floor(srand()*10+8),v5=Math.floor(srand()*8+4),v6=Math.floor(srand()*5+2);
+    const total=v1+v2+v3+v4+v5+v6; const p1=Math.round((v1/total)*100),p2=Math.round((v2/total)*100),p3=Math.round((v3/total)*100),p4=Math.round((v4/total)*100),p5=Math.round((v5/total)*100),p6=100-(p1+p2+p3+p4+p5);
+    return { branch:b.name.length>14?b.name.slice(0,12)+"…":b.name, fullName:b.name, "24K":p1,"22K":p2,"21K":p3,"18K":p4,"14K":p5,"8K":p6 };
   }); return acc;
 }, {});
 const computedH2hData = months.map((m,i) => {
@@ -151,9 +151,9 @@ const computedH2hData = months.map((m,i) => {
   }); return row;
 });
 const prodRevData = {
-  "2026": [{name:"22K Gold",revenue:848600,pct:38},{name:"21K Gold",revenue:603180,pct:27},{name:"18K Gold",revenue:335100,pct:15},{name:"Diamonds",revenue:268080,pct:12},{name:"Silver",revenue:178720,pct:8}],
-  "2025": [{name:"22K Gold",revenue:710400,pct:40},{name:"21K Gold",revenue:461760,pct:26},{name:"18K Gold",revenue:248640,pct:14},{name:"Diamonds",revenue:177600,pct:10},{name:"Silver",revenue:177600,pct:10}],
-  "2024": [{name:"22K Gold",revenue:567000,pct:42},{name:"21K Gold",revenue:337500,pct:25},{name:"18K Gold",revenue:175500,pct:13},{name:"Diamonds",revenue:121500,pct:9},{name:"Silver",revenue:148500,pct:11}],
+  "2026": [{name:"24K",revenue:714880,pct:32},{name:"22K",revenue:558500,pct:25},{name:"21K",revenue:402480,pct:18},{name:"18K",revenue:268080,pct:12},{name:"14K",revenue:178720,pct:8},{name:"8K",revenue:111700,pct:5}],
+  "2025": [{name:"24K",revenue:602280,pct:34},{name:"22K",revenue:443520,pct:25},{name:"21K",revenue:319680,pct:18},{name:"18K",revenue:195360,pct:11},{name:"14K",revenue:124320,pct:7},{name:"8K",revenue:88440,pct:5}],
+  "2024": [{name:"24K",revenue:486000,pct:36},{name:"22K",revenue:337500,pct:25},{name:"21K",revenue:229500,pct:17},{name:"18K",revenue:148500,pct:11},{name:"14K",revenue:94500,pct:7},{name:"8K",revenue:54000,pct:4}],
 };
 
 /* ── Shared Styles ── */
@@ -267,11 +267,11 @@ const HeatmapCell = ({value,highlight}) => {
   return <div style={{width:44,height:28,background:bg,borderRadius:3,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,color:(highlight||i>0.35)?"#fff":C.textMuted,fontWeight:(highlight||i>0.5)?700:400}}>{value}</div>;
 };
 
-const CTip = ({active,payload,label}) => {
+const CTip = ({active,payload,label,forceTextDark}) => {
   if (!active||!payload?.length) return null;
   return (<div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:8,padding:"10px 14px",fontSize:14,color:C.text,boxShadow:"0 4px 20px rgba(0,0,0,0.1)"}}>
     <div style={{fontWeight:600,marginBottom:4}}>{label}</div>
-    {payload.map((p,i) => <div key={i} style={{color:p.color||"#000",marginTop:2}}>{p.name}: {typeof p.value==="number"?p.value.toLocaleString():p.value}</div>)}
+    {payload.map((p,i) => <div key={i} style={{color:forceTextDark?"#000":(p.color||"#000"),marginTop:2}}>{p.name}: {typeof p.value==="number"?p.value.toLocaleString():p.value}</div>)}
   </div>);
 };
 
@@ -279,10 +279,10 @@ const Chips = ({items, colors, onRemove, onClear}) => (
   items.length > 0 && (
     <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:14}}>
       {items.map((name,i) => (
-        <div key={name} style={{display:"flex",alignItems:"center",gap:6,padding:"4px 10px",borderRadius:20,fontSize:13,fontWeight:500,background:`${(colors||COLORS)[i]}15`,color:(colors||COLORS)[i],border:`1px solid ${(colors||COLORS)[i]}`}}>
+        <div key={name} onClick={()=>onRemove(name)} style={{display:"flex",alignItems:"center",gap:6,padding:"4px 10px",borderRadius:20,fontSize:13,fontWeight:500,background:`${(colors||COLORS)[i]}15`,color:(colors||COLORS)[i],border:`1px solid ${(colors||COLORS)[i]}`,cursor:"pointer"}}>
           <div style={{width:8,height:8,borderRadius:"50%",background:(colors||COLORS)[i]}}/>
           {name}
-          <span onClick={()=>onRemove(name)} style={{cursor:"pointer",fontSize:14,lineHeight:1,marginLeft:2,opacity:0.6}}>×</span>
+          <span style={{fontSize:14,lineHeight:1,marginLeft:2,opacity:0.6}}>×</span>
         </div>
       ))}
       {items.length>1 && onClear && <button onClick={onClear} style={{padding:"4px 10px",borderRadius:20,fontSize:13,background:C.bgSubtle,color:C.textMuted,border:`1px solid ${C.border}`,cursor:"pointer",fontFamily:"inherit"}}>Clear all</button>}
@@ -360,7 +360,7 @@ export default function AnalyticsGuide() {
 {activeTab==="revenue" && (<>
   <div style={{marginBottom:20}}><RevenueOverview /></div>
 
-  <SectionCard title="Revenue Trend" explanation="Switch between Revenue, Invoices, and ATV metrics. Compare across years and toggle forecast to see a 3-month ARIMA-style projection.">
+  <SectionCard title="Revenue Trend" explanation="Track monthly performance across Revenue (total sales), Invoices (transaction count), and ATV (Average Transaction Value = Revenue ÷ Invoices). Use year-over-year comparison to spot growth or decline patterns. Enable Forecast to see a 3-month ARIMA-style projection with confidence bands — wider bands mean less certainty.">
     <Ctrl>
       <Dropdown options={["Revenue","Invoices","ATV"]} value={revMetric} onChange={setRevMetric}/>
       <Dropdown options={["Hide","Show"]} value={showForecast} onChange={setShowForecast} label="Forecast"/>
@@ -407,10 +407,13 @@ export default function AnalyticsGuide() {
       );
     })()}
     {showForecast==="Show" && (
-      <div style={{marginTop:14,padding:"12px 16px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`,display:"flex",alignItems:"flex-start",gap:10}}>
-        <div>
-          <div style={{fontSize:14,fontWeight:600,color:"#000",marginBottom:2}}>ARIMA-Style Forecast</div>
-          <div style={{fontSize:13,color:C.textMuted,lineHeight:1.6}}>3-month projection using exponential smoothing with seasonal decomposition. The shaded band represents the confidence interval.</div>
+      <div style={{marginTop:14,padding:"14px 18px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`}}>
+        <div style={{fontSize:14,fontWeight:600,color:"#000",marginBottom:6}}>How to Read the Forecast</div>
+        <div style={{fontSize:13,color:C.textMuted,lineHeight:1.7}}>
+          <div style={{marginBottom:6}}><strong style={{color:"#000"}}>Dashed cyan line</strong> — the predicted value for each future month, calculated using exponential smoothing with seasonal adjustment (ARIMA-style). It extends your current trend forward by 3 months.</div>
+          <div style={{marginBottom:6}}><strong style={{color:"#000"}}>Shaded band</strong> — the confidence interval around the prediction. A narrow band means the model is more confident; a wider band (further into the future) signals greater uncertainty. Values are likely to fall within this range.</div>
+          <div style={{marginBottom:6}}><strong style={{color:"#000"}}>Solid black line</strong> — actual recorded data for the current year (2026). Where the solid line ends and the dashed line begins is the boundary between real and projected data.</div>
+          <div><strong style={{color:"#000"}}>Tip:</strong> Compare the forecast against prior-year lines (orange/blue/green) to judge whether projected growth is realistic relative to historical patterns.</div>
         </div>
       </div>
     )}
@@ -423,8 +426,8 @@ export default function AnalyticsGuide() {
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
       {paymentData[payBrkYear].map((pm,i) => (
         <div key={pm.name} style={{display:"flex",alignItems:"center",gap:16,padding:"14px 18px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:130}}><div style={{width:10,height:10,borderRadius:"50%",background:COLORS[i]}}/><span style={{fontSize:14,fontWeight:600}}>{pm.name}</span></div>
-          <div style={{flex:1,minWidth:120}}><div style={{height:24,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${pm.pct}%`,background:COLORS[i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{pm.pct>15 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{pm.pct}%</span>}</div>{pm.pct<=15 && <span style={{position:"absolute",left:`${pm.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{pm.pct}%</span>}</div></div>
+          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:130}}><div style={{width:10,height:10,borderRadius:"50%",background:["#111","#333","#555"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{pm.name}</span></div>
+          <div style={{flex:1,minWidth:120}}><div style={{height:24,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${pm.pct}%`,background:["#111","#333","#555"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{pm.pct>15 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{pm.pct}%</span>}</div>{pm.pct<=15 && <span style={{position:"absolute",left:`${pm.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{pm.pct}%</span>}</div></div>
           <div style={{textAlign:"right",minWidth:110}}><div style={{fontSize:14,fontWeight:600}}>AED {(pm.revenue/1000).toFixed(0)}K</div><div style={{fontSize:12,color:C.textMuted}}>Revenue</div></div>
         </div>
       ))}
@@ -462,8 +465,8 @@ export default function AnalyticsGuide() {
     <div style={{display:"flex",flexDirection:"column",gap:10}}>
       {prodRevData[prodRevYear].map((p,i) => (
         <div key={p.name} style={{display:"flex",alignItems:"center",gap:16,padding:"12px 16px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:110}}><div style={{width:10,height:10,borderRadius:"50%",background:COLORS[i]}}/><span style={{fontSize:14,fontWeight:600}}>{p.name}</span></div>
-          <div style={{flex:1,minWidth:120}}><div style={{height:22,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${p.pct}%`,background:COLORS[i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{p.pct>12 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{p.pct}%</span>}</div>{p.pct<=12 && <span style={{position:"absolute",left:`${p.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{p.pct}%</span>}</div></div>
+          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:110}}><div style={{width:10,height:10,borderRadius:"50%",background:["#111","#333","#555","#777","#999","#bbb"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{p.name}</span></div>
+          <div style={{flex:1,minWidth:120}}><div style={{height:22,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${p.pct}%`,background:["#111","#333","#555","#777","#999","#bbb"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{p.pct>12 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{p.pct}%</span>}</div>{p.pct<=12 && <span style={{position:"absolute",left:`${p.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{p.pct}%</span>}</div></div>
           <div style={{textAlign:"right",minWidth:100}}><div style={{fontSize:14,fontWeight:600}}>AED {p.revenue.toLocaleString()}</div></div>
         </div>
       ))}
@@ -478,7 +481,6 @@ export default function AnalyticsGuide() {
 
 {/* ═══ BRANCHES ═══ */}
 {activeTab==="branches" && (<>
-  <div style={{marginBottom:20}}><BranchComparison /></div>
   <SectionCard title="Branch Ranking Table" explanation="Click any column header to sort. Tracks revenue, invoices, ATV, staff, and growth per branch.">
     <Ctrl>
       <Dropdown options={["2026","2025","2024"]} value={branchTableYear} onChange={setBranchTableYear} label="Year"/>
@@ -529,16 +531,36 @@ export default function AnalyticsGuide() {
       <MultiDropdown options={branchData["2026"].map(b=>b.name)} selected={branchLines} onChange={setBranchLines} label="Select branches" max={6}/>
     </Ctrl>
     <Chips items={branchLines} onRemove={n=>setBranchLines(branchLines.filter(x=>x!==n))} onClear={()=>setBranchLines([])}/>
-    <ResponsiveContainer width="100%" height={280}>
-      <LineChart data={branchTrendYear==="2025"?branchTrend2025:branchTrendYear==="2024"?branchTrend2024:branchTrend}>
-        <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
-        <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
-        <Tooltip content={<CTip/>}/>
-        {branchData["2026"].map((b,i)=>branchLines.includes(b.name) && <Line key={b.name} type="monotone" dataKey={b.name} stroke={COLORS[i]} strokeWidth={2} dot={{r:3}}/>)}
-        <Legend wrapperStyle={{ paddingTop: 24 }}/>
-      </LineChart>
-    </ResponsiveContainer>
+    {branchLines.length <= 2 ? (<>
+      <ResponsiveContainer width="100%" height={280}>
+        <BarChart data={branchTrendYear==="2025"?branchTrend2025:branchTrendYear==="2024"?branchTrend2024:branchTrend} barGap={2} barCategoryGap="25%">
+          <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
+          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
+          <Tooltip content={<CTip forceTextDark/>} cursor={{fill:"rgba(0,0,0,0.03)"}}/>
+          {branchLines.map((name,idx)=><Bar key={name} dataKey={name} fill={idx===0?"#000":"#d8d8d8"} radius={[4,4,0,0]} maxBarSize={24}/>)}
+        </BarChart>
+      </ResponsiveContainer>
+      <div style={{display:"flex",gap:24,justifyContent:"center",paddingTop:12}}>
+        {branchLines.map((name,idx)=>(
+          <div key={name} style={{display:"flex",alignItems:"center",gap:8}}>
+            <div style={{width:12,height:12,borderRadius:2,background:idx===0?"#000":"#d8d8d8"}}/>
+            <span style={{fontSize:14,color:"#000"}}>{name}</span>
+          </div>
+        ))}
+      </div>
+    </>) : (
+      <ResponsiveContainer width="100%" height={280}>
+        <LineChart data={branchTrendYear==="2025"?branchTrend2025:branchTrendYear==="2024"?branchTrend2024:branchTrend}>
+          <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
+          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
+          <Tooltip content={<CTip/>}/>
+          {branchData["2026"].map((b,i)=>branchLines.includes(b.name) && <Line key={b.name} type="monotone" dataKey={b.name} stroke={COLORS[i]} strokeWidth={2} dot={{r:3}}/>)}
+          <Legend wrapperStyle={{ paddingTop: 24 }}/>
+        </LineChart>
+      </ResponsiveContainer>
+    )}
   </SectionCard>
 
   <SectionCard title="Branch Revenue Heatmap" explanation="Color intensity = invoice count by hour and time period. Day view for staff scheduling, Month view for seasonal patterns.">
@@ -593,11 +615,12 @@ export default function AnalyticsGuide() {
               <YAxis axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} tickFormatter={v=>`${v}%`}/>
             </>)}
             <Tooltip content={<CTip/>}/>
-            <Bar dataKey="22K Gold" stackId="a" fill="#F4B400"/>
-            <Bar dataKey="21K Gold" stackId="a" fill="#E67700"/>
-            <Bar dataKey="18K Gold" stackId="a" fill="#4285F4"/>
-            <Bar dataKey="Diamonds" stackId="a" fill="#7C3AED"/>
-            <Bar dataKey="Silver" stackId="a" fill="#0891B2" radius={[4,4,0,0]}/>
+            <Bar dataKey="24K" stackId="a" fill="#F4B400"/>
+            <Bar dataKey="22K" stackId="a" fill="#E67700"/>
+            <Bar dataKey="21K" stackId="a" fill="#4285F4"/>
+            <Bar dataKey="18K" stackId="a" fill="#7C3AED"/>
+            <Bar dataKey="14K" stackId="a" fill="#0891B2"/>
+            <Bar dataKey="8K" stackId="a" fill="#DB2777" radius={[4,4,0,0]}/>
             <Legend wrapperStyle={{ paddingTop: 24 }}/>
           </BarChart>
         </ResponsiveContainer>
@@ -673,7 +696,7 @@ export default function AnalyticsGuide() {
     {prodView==="Donut" ? (
       <ResponsiveContainer width="100%" height={250}><PieChart><Pie data={productMix} cx="50%" cy="50%" innerRadius={55} outerRadius={95} paddingAngle={3} dataKey="value" label={({name,value})=>`${name} ${value}%`} labelLine={{stroke:C.textMuted}}>{productMix.map((_,i)=><Cell key={i} fill={COLORS[i]}/>)}</Pie><Tooltip/></PieChart></ResponsiveContainer>
     ) : (
-      <ResponsiveContainer width="100%" height={250}><AreaChart data={productTrend} stackOffset="expand"><CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/><XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/><YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${Math.round(v*100)}%`}/><Tooltip content={<CTip/>}/>{["22K Gold","21K Gold","18K Gold","Diamonds","Silver"].map((k,i)=><Area key={k} type="monotone" dataKey={k} stackId="1" fill={COLORS[i]} stroke={COLORS[i]} fillOpacity={0.8}/>)}<Legend wrapperStyle={{ paddingTop: 24 }}/></AreaChart></ResponsiveContainer>
+      <ResponsiveContainer width="100%" height={250}><AreaChart data={productTrend} stackOffset="expand"><CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/><XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/><YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${Math.round(v*100)}%`}/><Tooltip content={<CTip/>}/>{["24K","22K","21K","18K","14K","8K"].map((k,i)=><Area key={k} type="monotone" dataKey={k} stackId="1" fill={COLORS[i]} stroke={COLORS[i]} fillOpacity={0.8}/>)}<Legend wrapperStyle={{ paddingTop: 24 }}/></AreaChart></ResponsiveContainer>
     )}
   </SectionCard>
 
