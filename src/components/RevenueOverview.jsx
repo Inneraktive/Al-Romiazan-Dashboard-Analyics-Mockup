@@ -100,18 +100,23 @@ const S = {
     gap: 16,
     alignItems: "flex-start",
   },
+  dateInput: {
+    padding: "6px 10px",
+    fontSize: 13,
+    fontFamily: "inherit",
+    border: "1px solid #e4e4e4",
+    borderRadius: 4,
+    background: "#fff",
+    color: "#000",
+    outline: "none",
+    cursor: "pointer",
+  },
 };
 
 const TrendUpIcon = ({ color = "#589e67" }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
     <path d="M14 4.5L8.5 10L6 7.5L2 11.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     <path d="M10.5 4.5H14V8" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const CaretDown = () => (
-  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M4 6L8 10L12 6" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -161,17 +166,26 @@ const CustomTooltip = ({ active, payload, label, year }) => {
   );
 };
 
-const availableYears = [2023, 2024, 2025, 2026];
-
 export default function RevenueOverview() {
-  const [selectedYear, setSelectedYear] = useState(2025);
+  const [dateFrom, setDateFrom] = useState("2026-01-01");
+  const [dateTo, setDateTo] = useState("2026-12-31");
 
-  const revenueData = useMemo(() => generateRevenueData(selectedYear), [selectedYear]);
+  const selectedYear = new Date(dateFrom).getFullYear();
+  const fromMonth = new Date(dateFrom).getMonth();
+  const toMonth = new Date(dateTo).getMonth();
+
+  const revenueData = useMemo(() => {
+    const full = generateRevenueData(selectedYear);
+    return full.filter((_, i) => i >= fromMonth && i <= toMonth);
+  }, [selectedYear, fromMonth, toMonth]);
   const totalRevenue = useMemo(() => revenueData.reduce((sum, d) => sum + d.sales, 0), [revenueData]);
 
-  const prevYearData = useMemo(() => generateRevenueData(selectedYear - 1), [selectedYear]);
+  const prevYearData = useMemo(() => {
+    const full = generateRevenueData(selectedYear - 1);
+    return full.filter((_, i) => i >= fromMonth && i <= toMonth);
+  }, [selectedYear, fromMonth, toMonth]);
   const prevYearTotal = useMemo(() => prevYearData.reduce((sum, d) => sum + d.sales, 0), [prevYearData]);
-  const growthPct = Math.round(((totalRevenue - prevYearTotal) / prevYearTotal) * 100);
+  const growthPct = prevYearTotal ? Math.round(((totalRevenue - prevYearTotal) / prevYearTotal) * 100) : 0;
   const isPositive = growthPct >= 0;
 
   return (
@@ -200,25 +214,14 @@ export default function RevenueOverview() {
         </div>
 
         <div style={{ ...S.controls, alignItems: "center" }}>
-          <span style={{ fontSize: 14, fontWeight: 500, color: "#727272" }}>Year</span>
-          <select
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(Number(e.target.value))}
-            style={{
-              ...S.dropdown,
-              appearance: "none",
-              WebkitAppearance: "none",
-              MozAppearance: "none",
-              paddingRight: 32,
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "right 8px center",
-            }}
-          >
-            {availableYears.map((year) => (
-              <option key={year} value={year}>{year}</option>
-            ))}
-          </select>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <label style={{ fontSize: 13, color: "#727272" }}>From</label>
+            <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} style={S.dateInput} />
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <label style={{ fontSize: 13, color: "#727272" }}>To</label>
+            <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} style={S.dateInput} />
+          </div>
         </div>
       </div>
 

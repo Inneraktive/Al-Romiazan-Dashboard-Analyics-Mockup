@@ -116,9 +116,23 @@ const branchData = {
   "2025": [{name:"Mall of Emirates",revenue:465000,invoices:310,atv:1500,growth:9.1,cancel:2.5,sp:4,revPerSP:116250},{name:"Dubai Mall",revenue:440000,invoices:270,atv:1630,growth:6.5,cancel:2.0,sp:4,revPerSP:110000},{name:"Gold Souk",revenue:425000,invoices:450,atv:944,growth:1.2,cancel:3.8,sp:6,revPerSP:70833},{name:"Abu Dhabi Mall",revenue:305000,invoices:210,atv:1452,growth:11.3,cancel:1.8,sp:3,revPerSP:101667},{name:"Sharjah City",revenue:265000,invoices:290,atv:914,growth:4.0,cancel:3.4,sp:4,revPerSP:66250},{name:"Ajman Branch",revenue:195000,invoices:190,atv:1026,growth:2.1,cancel:4.6,sp:2,revPerSP:97500}],
   "2024": [{name:"Mall of Emirates",revenue:420000,invoices:285,atv:1474,growth:7.8,cancel:2.9,sp:3,revPerSP:140000},{name:"Dubai Mall",revenue:410000,invoices:260,atv:1577,growth:5.2,cancel:2.3,sp:4,revPerSP:102500},{name:"Gold Souk",revenue:418000,invoices:470,atv:889,growth:-0.5,cancel:4.5,sp:5,revPerSP:83600},{name:"Abu Dhabi Mall",revenue:270000,invoices:195,atv:1385,growth:8.6,cancel:2.2,sp:3,revPerSP:90000},{name:"Sharjah City",revenue:252000,invoices:280,atv:900,growth:3.1,cancel:3.8,sp:3,revPerSP:84000},{name:"Ajman Branch",revenue:188000,invoices:185,atv:1016,growth:0.8,cancel:5.3,sp:2,revPerSP:94000}],
 };
-const branchTrend = months.map(m => ({month:m,"Mall of Emirates":40000+srand()*15000,"Dubai Mall":35000+srand()*15000,"Gold Souk":30000+srand()*12000,"Abu Dhabi Mall":25000+srand()*12000,"Sharjah City":22000+srand()*10000,"Ajman Branch":15000+srand()*8000}));
-const branchTrend2025 = months.map(m => ({month:m,"Mall of Emirates":36000+srand()*13000,"Dubai Mall":33000+srand()*13000,"Gold Souk":29000+srand()*11000,"Abu Dhabi Mall":22000+srand()*10000,"Sharjah City":20000+srand()*9000,"Ajman Branch":14000+srand()*7000}));
-const branchTrend2024 = months.map(m => ({month:m,"Mall of Emirates":32000+srand()*11000,"Dubai Mall":30000+srand()*11000,"Gold Souk":27000+srand()*10000,"Abu Dhabi Mall":19000+srand()*9000,"Sharjah City":18000+srand()*8000,"Ajman Branch":12000+srand()*6000}));
+const branchTrendByMetric = {
+  Revenue: {
+    "2026": months.map(m => ({month:m,"Mall of Emirates":40000+srand()*15000,"Dubai Mall":35000+srand()*15000,"Gold Souk":30000+srand()*12000,"Abu Dhabi Mall":25000+srand()*12000,"Sharjah City":22000+srand()*10000,"Ajman Branch":15000+srand()*8000})),
+    "2025": months.map(m => ({month:m,"Mall of Emirates":36000+srand()*13000,"Dubai Mall":33000+srand()*13000,"Gold Souk":29000+srand()*11000,"Abu Dhabi Mall":22000+srand()*10000,"Sharjah City":20000+srand()*9000,"Ajman Branch":14000+srand()*7000})),
+    "2024": months.map(m => ({month:m,"Mall of Emirates":32000+srand()*11000,"Dubai Mall":30000+srand()*11000,"Gold Souk":27000+srand()*10000,"Abu Dhabi Mall":19000+srand()*9000,"Sharjah City":18000+srand()*8000,"Ajman Branch":12000+srand()*6000})),
+  },
+  Invoices: {
+    "2026": months.map(m => ({month:m,"Mall of Emirates":Math.floor(25+srand()*15),"Dubai Mall":Math.floor(20+srand()*14),"Gold Souk":Math.floor(30+srand()*18),"Abu Dhabi Mall":Math.floor(16+srand()*10),"Sharjah City":Math.floor(22+srand()*12),"Ajman Branch":Math.floor(12+srand()*8)})),
+    "2025": months.map(m => ({month:m,"Mall of Emirates":Math.floor(22+srand()*13),"Dubai Mall":Math.floor(18+srand()*12),"Gold Souk":Math.floor(32+srand()*16),"Abu Dhabi Mall":Math.floor(14+srand()*9),"Sharjah City":Math.floor(20+srand()*10),"Ajman Branch":Math.floor(13+srand()*7)})),
+    "2024": months.map(m => ({month:m,"Mall of Emirates":Math.floor(20+srand()*11),"Dubai Mall":Math.floor(17+srand()*10),"Gold Souk":Math.floor(34+srand()*15),"Abu Dhabi Mall":Math.floor(13+srand()*8),"Sharjah City":Math.floor(19+srand()*9),"Ajman Branch":Math.floor(12+srand()*6)})),
+  },
+  ATV: {
+    "2026": months.map(m => ({month:m,"Mall of Emirates":Math.floor(1400+srand()*300),"Dubai Mall":Math.floor(1500+srand()*350),"Gold Souk":Math.floor(850+srand()*250),"Abu Dhabi Mall":Math.floor(1350+srand()*300),"Sharjah City":Math.floor(800+srand()*200),"Ajman Branch":Math.floor(950+srand()*200)})),
+    "2025": months.map(m => ({month:m,"Mall of Emirates":Math.floor(1350+srand()*280),"Dubai Mall":Math.floor(1450+srand()*320),"Gold Souk":Math.floor(820+srand()*230),"Abu Dhabi Mall":Math.floor(1300+srand()*280),"Sharjah City":Math.floor(780+srand()*190),"Ajman Branch":Math.floor(920+srand()*180)})),
+    "2024": months.map(m => ({month:m,"Mall of Emirates":Math.floor(1300+srand()*250),"Dubai Mall":Math.floor(1400+srand()*300),"Gold Souk":Math.floor(780+srand()*210),"Abu Dhabi Mall":Math.floor(1250+srand()*250),"Sharjah City":Math.floor(750+srand()*180),"Ajman Branch":Math.floor(900+srand()*170)})),
+  },
+};
 const spData = [{name:"Ahmed K.",revenue:185000,invoices:120,atv:1542,customers:89,retention:42},{name:"Fatima R.",revenue:172000,invoices:105,atv:1638,customers:78,retention:51},{name:"Omar S.",revenue:158000,invoices:140,atv:1129,customers:110,retention:38},{name:"Sara M.",revenue:143000,invoices:98,atv:1459,customers:72,retention:45},{name:"Khalid A.",revenue:128000,invoices:115,atv:1113,customers:95,retention:33}];
 const productMix = [{name:"24K",value:32},{name:"22K",value:25},{name:"21K",value:18},{name:"18K",value:12},{name:"14K",value:8},{name:"8K",value:5}];
 const pricePerGram = months.map((m,i) => ({month:m,sellingPrice:245+Math.sin(i*0.5)*20+srand()*10,spotPrice:210+Math.sin(i*0.5)*15+srand()*8}));
@@ -302,11 +316,16 @@ const tabs = [
 
 export default function AnalyticsGuide() {
   const [activeTab,setActiveTab] = useState("revenue");
-  const [revYears,setRevYears] = useState(new Set(["2025"]));
+  const [revYears,setRevYears] = useState(["2025"]);
+  const [revTrendDateFrom,setRevTrendDateFrom] = useState("2026-01-01");
+  const [revTrendDateTo,setRevTrendDateTo] = useState("2026-12-31");
   const [revMetric,setRevMetric] = useState("Revenue");
-  const [prodRevYear,setProdRevYear] = useState("2026");
-  const [payBrkYear,setPayBrkYear] = useState("2026");
-  const [paretoYear,setParetoYear] = useState("2026");
+  const [prodRevDateFrom,setProdRevDateFrom] = useState("2026-01-01");
+  const [prodRevDateTo,setProdRevDateTo] = useState("2026-12-31");
+  const [payBrkDateFrom,setPayBrkDateFrom] = useState("2026-01-01");
+  const [payBrkDateTo,setPayBrkDateTo] = useState("2026-12-31");
+  const [paretoDateFrom,setPareDateFrom] = useState("2026-01-01");
+  const [paretoDateTo,setPareDateTo] = useState("2026-12-31");
   const [heatBranch,setHeatBranch] = useState("All Branches");
   const [heatView,setHeatView] = useState("Day");
   const [branchSort,setBranchSort] = useState("Revenue");
@@ -326,13 +345,17 @@ export default function AnalyticsGuide() {
   const [retTier,setRetTier] = useState("All Tiers");
   const [cancelView,setCancelView] = useState("Rate + Value");
   const [showForecast,setShowForecast] = useState("Hide");
+  const [dateFrom,setDateFrom] = useState("2026-01-01");
+  const [dateTo,setDateTo] = useState("2026-12-31");
 
   return (
     <div style={{background:C.bg,minHeight:"100vh",color:C.text,fontFamily:"'DM Sans',-apple-system,sans-serif",fontSize:14}}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
+      <div style={{maxWidth:1200,margin:"0 auto",padding:"0 32px"}}>
+
       {/* ── Header ── */}
-      <div style={{background:"#fff",borderBottom:`1px solid ${C.border}`,padding:"20px 32px"}}>
+      <div style={{padding:"20px 0"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <div style={{width:36,height:36,borderRadius:4,background:"#000",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,fontWeight:700,color:"#fff"}}>AR</div>
           <div>
@@ -343,7 +366,7 @@ export default function AnalyticsGuide() {
       </div>
 
       {/* ── Tabs ── */}
-      <div style={{display:"flex",gap:0,padding:"0 32px",background:"#fff",overflowX:"auto",borderBottom:`1px solid ${C.border}`}}>
+      <div style={{display:"flex",gap:0,overflowX:"auto",borderBottom:`1px solid ${C.border}`}}>
         {tabs.map(t => (
           <button key={t.key} onClick={()=>setActiveTab(t.key)} style={{
             padding:"12px 20px",fontSize:14,fontWeight:activeTab===t.key?600:400,
@@ -354,7 +377,31 @@ export default function AnalyticsGuide() {
         ))}
       </div>
 
-      <div style={{padding:"24px 32px",maxWidth:1200,margin:"0 auto"}}>
+      {/* ── Global Date Range ── */}
+      <div style={{display:"flex",alignItems:"center",gap:16,padding:"12px 0",borderBottom:`1px solid ${C.border}`}}>
+        <span style={{fontSize:14,fontWeight:500,color:C.text}}>Date Range</span>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <label style={{fontSize:13,color:C.textMuted}}>From</label>
+          <input type="date" value={dateFrom} onChange={e=>setDateFrom(e.target.value)} style={{
+            padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,
+            background:"#fff",color:C.text,outline:"none",cursor:"pointer",
+          }}/>
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:8}}>
+          <label style={{fontSize:13,color:C.textMuted}}>To</label>
+          <input type="date" value={dateTo} onChange={e=>setDateTo(e.target.value)} style={{
+            padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,
+            background:"#fff",color:C.text,outline:"none",cursor:"pointer",
+          }}/>
+        </div>
+        <button onClick={()=>{setDateFrom("2026-01-01");setDateTo("2026-12-31");}} style={{
+          padding:"6px 14px",fontSize:13,fontWeight:500,fontFamily:"inherit",
+          background:"transparent",border:`1px solid ${C.border}`,borderRadius:4,
+          color:C.textMuted,cursor:"pointer",
+        }}>Reset</button>
+      </div>
+
+      <div style={{paddingTop:24}}>
 
 {/* ═══ REVENUE ═══ */}
 {activeTab==="revenue" && (<>
@@ -364,17 +411,15 @@ export default function AnalyticsGuide() {
     <Ctrl>
       <Dropdown options={["Revenue","Invoices","ATV"]} value={revMetric} onChange={setRevMetric}/>
       <Dropdown options={["Hide","Show"]} value={showForecast} onChange={setShowForecast} label="Forecast"/>
-      <span style={{fontSize:14,color:C.textMuted}}>Compare:</span>
-      {["2025","2024","2023"].map(year => {
-        const on=revYears.has(year);
-        return (
-          <button key={year} onClick={()=>{const s=new Set(revYears);if(on)s.delete(year);else s.add(year);setRevYears(s);}} style={{
-            ...dropdownStyle,
-            background:on?"#000":"#fff", color:on?"#fff":"#000",
-            border:on?"1px solid #000":"1px solid rgba(0,0,0,0.2)",
-          }}>{year}</button>
-        );
-      })}
+      <MultiDropdown options={["2025","2024","2023"]} selected={revYears} onChange={setRevYears} label="Compare" max={3}/>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>From</label>
+        <input type="date" value={revTrendDateFrom} onChange={e=>setRevTrendDateFrom(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>To</label>
+        <input type="date" value={revTrendDateTo} onChange={e=>setRevTrendDateTo(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
     </Ctrl>
     {(() => {
       const curKey = revMetric==="Revenue"?"monthly":revMetric==="Invoices"?"invoices":"atv";
@@ -398,9 +443,9 @@ export default function AnalyticsGuide() {
             {showForecast==="Show" && <Area type="monotone" dataKey={fcUpper} fill="url(#fcBand)" stroke="none" name="Upper CI" connectNulls={false} legendType="none"/>}
             {showForecast==="Show" && <Area type="monotone" dataKey={fcLower} fill="#fff" stroke="none" name="Lower CI" connectNulls={false} legendType="none"/>}
             {showForecast==="Show" && <Line type="monotone" dataKey={fcKey} stroke={C.cyan} strokeWidth={2} strokeDasharray="8 4" dot={{r:4,fill:C.cyan,stroke:"#fff",strokeWidth:2}} name="Forecast (ARIMA)" connectNulls={false}/>}
-            {revYears.has("2025") && <Line type="monotone" dataKey={suffix?"y2025"+suffix:"y2025"} stroke="#E67700" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#E67700"}} name="2025"/>}
-            {revYears.has("2024") && <Line type="monotone" dataKey={suffix?"y2024"+suffix:"y2024"} stroke="#4285F4" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#4285F4"}} name="2024"/>}
-            {revYears.has("2023") && <Line type="monotone" dataKey={suffix?"y2023"+suffix:"y2023"} stroke="#34A853" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#34A853"}} name="2023"/>}
+            {revYears.includes("2025") && <Line type="monotone" dataKey={suffix?"y2025"+suffix:"y2025"} stroke="#E67700" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#E67700"}} name="2025"/>}
+            {revYears.includes("2024") && <Line type="monotone" dataKey={suffix?"y2024"+suffix:"y2024"} stroke="#4285F4" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#4285F4"}} name="2024"/>}
+            {revYears.includes("2023") && <Line type="monotone" dataKey={suffix?"y2023"+suffix:"y2023"} stroke="#34A853" strokeWidth={2} strokeDasharray="6 3" dot={{r:2,fill:"#34A853"}} name="2023"/>}
             <Legend wrapperStyle={{ paddingTop: 24 }}/>
           </ComposedChart>
         </ResponsiveContainer>
@@ -421,59 +466,82 @@ export default function AnalyticsGuide() {
 
   <SectionCard title="Revenue by Payment Method" explanation="Percentage share and actual revenue per method. Switch years to see how payment preferences shift.">
     <Ctrl>
-      <Dropdown options={["2026","2025","2024"]} value={payBrkYear} onChange={setPayBrkYear} label="Year"/>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>From</label>
+        <input type="date" value={payBrkDateFrom} onChange={e=>setPayBrkDateFrom(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>To</label>
+        <input type="date" value={payBrkDateTo} onChange={e=>setPayBrkDateTo(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
     </Ctrl>
     <div style={{display:"flex",flexDirection:"column",gap:12}}>
-      {paymentData[payBrkYear].map((pm,i) => (
+      {(paymentData[new Date(payBrkDateFrom).getFullYear().toString()] || paymentData["2026"]).map((pm,i) => (
         <div key={pm.name} style={{display:"flex",alignItems:"center",gap:16,padding:"14px 18px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:130}}><div style={{width:10,height:10,borderRadius:"50%",background:["#111","#333","#555"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{pm.name}</span></div>
-          <div style={{flex:1,minWidth:120}}><div style={{height:24,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${pm.pct}%`,background:["#111","#333","#555"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{pm.pct>15 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{pm.pct}%</span>}</div>{pm.pct<=15 && <span style={{position:"absolute",left:`${pm.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{pm.pct}%</span>}</div></div>
+          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:130}}><div style={{width:10,height:10,borderRadius:"50%",background:["#4285F4","#E67700","#34A853"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{pm.name}</span></div>
+          <div style={{flex:1,minWidth:120}}><div style={{height:24,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${pm.pct}%`,background:["#4285F4","#E67700","#34A853"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{pm.pct>15 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{pm.pct}%</span>}</div>{pm.pct<=15 && <span style={{position:"absolute",left:`${pm.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{pm.pct}%</span>}</div></div>
           <div style={{textAlign:"right",minWidth:110}}><div style={{fontSize:14,fontWeight:600}}>AED {(pm.revenue/1000).toFixed(0)}K</div><div style={{fontSize:12,color:C.textMuted}}>Revenue</div></div>
         </div>
       ))}
       <div style={{display:"flex",alignItems:"center",gap:16,padding:"12px 18px",background:"#fff",borderRadius:4,border:"2px solid #000"}}>
         <div style={{minWidth:130,display:"flex",alignItems:"center",gap:10}}><div style={{width:10}}/><span style={{fontSize:14,fontWeight:700}}>Total</span></div>
         <div style={{flex:1,minWidth:120}}><div style={{height:24,background:"#000",borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10}}><span style={{fontSize:12,fontWeight:700,color:"#fff"}}>100%</span></div></div>
-        <div style={{textAlign:"right",minWidth:110}}><div style={{fontSize:14,fontWeight:700}}>AED {(paymentData[payBrkYear].reduce((s,p)=>s+p.revenue,0)/1000).toFixed(0)}K</div><div style={{fontSize:12,color:C.textMuted}}>Revenue</div></div>
+        <div style={{textAlign:"right",minWidth:110}}><div style={{fontSize:14,fontWeight:700}}>AED {((paymentData[new Date(payBrkDateFrom).getFullYear().toString()] || paymentData["2026"]).reduce((s,p)=>s+p.revenue,0)/1000).toFixed(0)}K</div><div style={{fontSize:12,color:C.textMuted}}>Revenue</div></div>
       </div>
     </div>
   </SectionCard>
 
   <SectionCard title="Invoice Value Distribution (Pareto)" explanation="Groups invoices into value buckets. The bars show invoice count, the line shows cumulative percentage — revealing the Pareto effect.">
     <Ctrl>
-      <Dropdown options={["2026","2025","2024"]} value={paretoYear} onChange={setParetoYear} label="Year"/>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>From</label>
+        <input type="date" value={paretoDateFrom} onChange={e=>setPareDateFrom(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>To</label>
+        <input type="date" value={paretoDateTo} onChange={e=>setPareDateTo(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
     </Ctrl>
-    <div style={{fontSize:14,fontWeight:500,marginBottom:8}}>Total Invoices: <span style={{fontWeight:700}}>{invoiceDistribution[paretoYear].reduce((s,d)=>s+d.count,0).toLocaleString()}</span></div>
+    {(() => { const paretoKey = new Date(paretoDateFrom).getFullYear().toString(); const paretoData = invoiceDistribution[paretoKey] || invoiceDistribution["2026"]; return (<>
+    <div style={{fontSize:14,fontWeight:500,marginBottom:8}}>Total Invoices: <span style={{fontWeight:700}}>{paretoData.reduce((s,d)=>s+d.count,0).toLocaleString()}</span></div>
     <ResponsiveContainer width="100%" height={280}>
-      <ComposedChart data={invoiceDistribution[paretoYear]}>
+      <ComposedChart data={paretoData}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
         <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
         <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
         <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.orange}} tickFormatter={v=>`${v}%`}/>
         <Tooltip content={<CTip/>}/>
-        <Bar yAxisId="left" dataKey="count" fill="#000" radius={[4,4,0,0]} name="Invoice Count"/>
+        <Bar yAxisId="left" dataKey="count" radius={[4,4,0,0]} name="Invoice Count">{paretoData.map((_,i)=><Cell key={i} fill={COLORS[i % COLORS.length]}/>)}</Bar>
         <Line yAxisId="right" type="monotone" dataKey="cumPct" stroke={C.orange} strokeWidth={2} dot={{fill:C.orange,r:3}} name="Cumulative %"/>
         <Legend wrapperStyle={{ paddingTop: 24 }}/>
       </ComposedChart>
     </ResponsiveContainer>
+    </>); })()}
   </SectionCard>
 
   <SectionCard title="Revenue by Product Mix" explanation="Revenue distribution across product categories with actual AED amounts.">
     <Ctrl>
-      <Dropdown options={["2026","2025","2024"]} value={prodRevYear} onChange={setProdRevYear} label="Year"/>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>From</label>
+        <input type="date" value={prodRevDateFrom} onChange={e=>setProdRevDateFrom(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:8}}>
+        <label style={{fontSize:13,color:C.textMuted}}>To</label>
+        <input type="date" value={prodRevDateTo} onChange={e=>setProdRevDateTo(e.target.value)} style={{padding:"6px 10px",fontSize:13,fontFamily:"inherit",border:`1px solid ${C.border}`,borderRadius:4,background:"#fff",color:C.text,outline:"none",cursor:"pointer"}}/>
+      </div>
     </Ctrl>
     <div style={{display:"flex",flexDirection:"column",gap:10}}>
-      {prodRevData[prodRevYear].map((p,i) => (
+      {(prodRevData[new Date(prodRevDateFrom).getFullYear().toString()] || prodRevData["2026"]).map((p,i) => (
         <div key={p.name} style={{display:"flex",alignItems:"center",gap:16,padding:"12px 16px",background:C.bgSubtle,borderRadius:4,border:`1px solid ${C.border}`}}>
-          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:110}}><div style={{width:10,height:10,borderRadius:"50%",background:["#111","#333","#555","#777","#999","#bbb"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{p.name}</span></div>
-          <div style={{flex:1,minWidth:120}}><div style={{height:22,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${p.pct}%`,background:["#111","#333","#555","#777","#999","#bbb"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{p.pct>12 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{p.pct}%</span>}</div>{p.pct<=12 && <span style={{position:"absolute",left:`${p.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{p.pct}%</span>}</div></div>
+          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:110}}><div style={{width:10,height:10,borderRadius:"50%",background:["#4285F4","#E67700","#34A853","#7C3AED","#0891B2","#DB2777"][i]}}/><span style={{fontSize:14,fontWeight:600}}>{p.name}</span></div>
+          <div style={{flex:1,minWidth:120}}><div style={{height:22,background:"#e8e8e8",borderRadius:4,overflow:"hidden",position:"relative"}}><div style={{height:"100%",width:`${p.pct}%`,background:["#4285F4","#E67700","#34A853","#7C3AED","#0891B2","#DB2777"][i],borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10,transition:"width 0.6s cubic-bezier(0.4,0,0.2,1)"}}>{p.pct>12 && <span style={{fontSize:12,fontWeight:700,color:"#fff"}}>{p.pct}%</span>}</div>{p.pct<=12 && <span style={{position:"absolute",left:`${p.pct+2}%`,top:"50%",transform:"translateY(-50%)",fontSize:12,fontWeight:700}}>{p.pct}%</span>}</div></div>
           <div style={{textAlign:"right",minWidth:100}}><div style={{fontSize:14,fontWeight:600}}>AED {p.revenue.toLocaleString()}</div></div>
         </div>
       ))}
       <div style={{display:"flex",alignItems:"center",gap:16,padding:"10px 16px",background:"#fff",borderRadius:4,border:"2px solid #000"}}>
         <div style={{display:"flex",alignItems:"center",gap:10,minWidth:110}}><div style={{width:10}}/><span style={{fontSize:14,fontWeight:700}}>Total</span></div>
         <div style={{flex:1,minWidth:120}}><div style={{height:22,background:"#000",borderRadius:4,display:"flex",alignItems:"center",paddingLeft:10}}><span style={{fontSize:12,fontWeight:700,color:"#fff"}}>100%</span></div></div>
-        <div style={{textAlign:"right",minWidth:100}}><div style={{fontSize:14,fontWeight:700}}>AED {prodRevData[prodRevYear].reduce((s,p)=>s+p.revenue,0).toLocaleString()}</div></div>
+        <div style={{textAlign:"right",minWidth:100}}><div style={{fontSize:14,fontWeight:700}}>AED {(prodRevData[new Date(prodRevDateFrom).getFullYear().toString()] || prodRevData["2026"]).reduce((s,p)=>s+p.revenue,0).toLocaleString()}</div></div>
       </div>
     </div>
   </SectionCard>
@@ -528,15 +596,14 @@ export default function AnalyticsGuide() {
     <Ctrl>
       <Dropdown options={["Revenue","Invoices","ATV"]} value={branchMetric} onChange={setBranchMetric}/>
       <Dropdown options={["2026","2025","2024"]} value={branchTrendYear} onChange={setBranchTrendYear} label="Year"/>
-      <MultiDropdown options={branchData["2026"].map(b=>b.name)} selected={branchLines} onChange={setBranchLines} label="Select branches" max={6}/>
+      <MultiDropdown options={branchData["2026"].map(b=>b.name)} selected={branchLines} onChange={v=>{if(v.length>=1)setBranchLines(v);}} label="Select branches" max={6}/>
     </Ctrl>
-    <Chips items={branchLines} onRemove={n=>setBranchLines(branchLines.filter(x=>x!==n))} onClear={()=>setBranchLines([])}/>
     {branchLines.length <= 2 ? (<>
       <ResponsiveContainer width="100%" height={280}>
-        <BarChart data={branchTrendYear==="2025"?branchTrend2025:branchTrendYear==="2024"?branchTrend2024:branchTrend} barGap={2} barCategoryGap="25%">
+        <BarChart data={branchTrendByMetric[branchMetric][branchTrendYear]} barGap={2} barCategoryGap="25%">
           <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
           <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
-          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
+          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>branchMetric==="Revenue"?`${(v/1000).toFixed(0)}K`:branchMetric==="ATV"?`${(v/1000).toFixed(1)}K`:v}/>
           <Tooltip content={<CTip forceTextDark/>} cursor={{fill:"rgba(0,0,0,0.03)"}}/>
           {branchLines.map((name,idx)=><Bar key={name} dataKey={name} fill={idx===0?"#000":"#d8d8d8"} radius={[4,4,0,0]} maxBarSize={24}/>)}
         </BarChart>
@@ -551,10 +618,10 @@ export default function AnalyticsGuide() {
       </div>
     </>) : (
       <ResponsiveContainer width="100%" height={280}>
-        <LineChart data={branchTrendYear==="2025"?branchTrend2025:branchTrendYear==="2024"?branchTrend2024:branchTrend}>
+        <LineChart data={branchTrendByMetric[branchMetric][branchTrendYear]}>
           <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
           <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
-          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
+          <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>branchMetric==="Revenue"?`${(v/1000).toFixed(0)}K`:branchMetric==="ATV"?`${(v/1000).toFixed(1)}K`:v}/>
           <Tooltip content={<CTip/>}/>
           {branchData["2026"].map((b,i)=>branchLines.includes(b.name) && <Line key={b.name} type="monotone" dataKey={b.name} stroke={COLORS[i]} strokeWidth={2} dot={{r:3}}/>)}
           <Legend wrapperStyle={{ paddingTop: 24 }}/>
@@ -875,6 +942,7 @@ export default function AnalyticsGuide() {
   </SectionCard>
 </>)}
 
+      </div>
       </div>
     </div>
   );
