@@ -1,0 +1,859 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  color: $c-text;
+  background: $c-bg;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Card
+.card {
+  background: $c-card;
+  border: 1px solid $c-border;
+  border-radius: 4px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Section Card
+.section-card {
+  @extend .card;
+  margin-bottom: 20px;
+
+  &__title {
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  &__explanation {
+    color: $c-text-muted;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 8px 0 16px;
+  }
+}
+
+// KPI Card
+.kpi-card {
+  background: $c-card;
+  border: 1px solid $c-border;
+  border-radius: 4px;
+  padding: 16px 20px;
+  min-width: 150px;
+  flex: 1;
+
+  &__label {
+    color: $c-text-muted;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  &__value {
+    color: #000;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 6px 0;
+  }
+
+  &__change {
+    font-size: 13px;
+
+    &--positive {
+      color: $c-green;
+    }
+
+    &--negative {
+      color: $c-red;
+    }
+  }
+}
+
+// Control Bar
+.ctrl {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+// Dropdown
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__label {
+    font-size: 14px;
+    color: $c-text-muted;
+    margin-right: 8px;
+  }
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 100%;
+    background: #fff;
+    border: 1px solid $c-border;
+    border-radius: 4px;
+    box-shadow: $shadow-sm;
+    z-index: 20;
+    overflow: hidden;
+  }
+
+  &__option {
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &--active {
+      font-weight: 600;
+      color: #000;
+      background: #f9f9f9;
+    }
+
+    &--inactive {
+      font-weight: 400;
+      color: $c-text-muted;
+      background: #fff;
+    }
+  }
+}
+
+// Multi Dropdown
+.multi-dropdown {
+  position: relative;
+
+  &__trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    background: #fff;
+    cursor: pointer;
+    min-width: 200px;
+    font-family: inherit;
+
+    &--open {
+      border: 1px solid #000;
+    }
+
+    &--closed {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    flex: 1;
+    background: transparent;
+    font-family: inherit;
+    color: $c-text;
+  }
+
+  &__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: #fff;
+    border: 1px solid $c-border;
+    border-radius: 4px;
+    box-shadow: $shadow-sm;
+    z-index: 20;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+
+    &--selected {
+      background: #f9f9f9;
+    }
+
+    &--disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--checked {
+      border: 2px solid #000;
+      background: #000;
+    }
+
+    &--unchecked {
+      border: 2px solid $c-border;
+      background: transparent;
+    }
+  }
+
+  &__empty {
+    padding: 12px;
+    font-size: 14px;
+    color: $c-text-muted;
+    text-align: center;
+  }
+}
+
+// Chips
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  &__remove {
+    font-size: 14px;
+    line-height: 1;
+    margin-left: 2px;
+    opacity: 0.6;
+  }
+
+  &__clear {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: $c-bg-subtle;
+    color: $c-text-muted;
+    border: 1px solid $c-border;
+    cursor: pointer;
+    font-family: inherit;
+  }
+}
+
+// Tables
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+
+  &__header {
+    border-bottom: 2px solid $c-border;
+  }
+
+  &__th {
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    user-select: none;
+
+    &--sortable {
+      cursor: pointer;
+    }
+
+    &--active {
+      color: #000;
+    }
+
+    &--inactive {
+      color: $c-text-muted;
+    }
+  }
+
+  &__row {
+    border-bottom: 1px solid $c-border;
+  }
+
+  &__td {
+    padding: 10px 12px;
+
+    &--bold {
+      font-weight: 500;
+    }
+
+    &--green {
+      color: $c-green;
+      font-weight: 600;
+    }
+
+    &--red {
+      color: $c-red;
+      font-weight: 600;
+    }
+  }
+}
+
+// Date Input
+.date-input {
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  border: 1px solid $c-border;
+  border-radius: 4px;
+  background: #fff;
+  color: $c-text;
+  outline: none;
+  cursor: pointer;
+}
+
+// Heatmap
+.heatmap-cell {
+  width: 44px;
+  height: 28px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+
+// Progress bar (payment method / product mix)
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  background: $c-bg-subtle;
+  border-radius: 4px;
+  border: 1px solid $c-border;
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 130px;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__bar-container {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  &__bar-bg {
+    height: 24px;
+    background: #e8e8e8;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &__bar-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__bar-pct-outside {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__value {
+    text-align: right;
+    min-width: 110px;
+  }
+
+  &__amount {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &__sublabel {
+    font-size: 12px;
+    color: $c-text-muted;
+  }
+}
+
+.progress-row--total {
+  background: #fff;
+  border: 2px solid #000;
+
+  .progress-row__name {
+    font-weight: 700;
+  }
+
+  .progress-row__bar-bg {
+    background: #000;
+  }
+
+  .progress-row__amount {
+    font-weight: 700;
+  }
+}
+
+// Revenue Overview
+.revenue-overview {
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  &__amount-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__currency {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    letter-spacing: -0.36px;
+  }
+
+  &__amount {
+    font-size: 32px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 36px;
+    padding: 4px 8px;
+
+    &--positive {
+      background: #eef5f0;
+    }
+
+    &--negative {
+      background: #fef2f2;
+    }
+  }
+
+  &__badge-text {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  &__sub-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: $c-text-muted;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+}
+
+// Tabs
+.tab-nav {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid $c-border;
+
+  &__btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+
+    &--active {
+      font-weight: 600;
+      color: #000;
+      border-bottom: 2px solid #000;
+    }
+
+    &--inactive {
+      font-weight: 400;
+      color: $c-text-muted;
+      border-bottom: 2px solid transparent;
+    }
+  }
+}
+
+// Global date range
+.global-date {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid $c-border;
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $c-text;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__field-label {
+    font-size: 13px;
+    color: $c-text-muted;
+  }
+
+  &__reset {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    background: transparent;
+    border: 1px solid $c-border;
+    border-radius: 4px;
+    color: $c-text-muted;
+    cursor: pointer;
+  }
+}
+
+// App Header
+.app-header {
+  padding: 20px 0;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 20px;
+    color: #000;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: 14px;
+    color: $c-text-muted;
+  }
+}
+
+// Forecast info box
+.forecast-info {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: $c-bg-subtle;
+  border-radius: 4px;
+  border: 1px solid $c-border;
+
+  &__title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 6px;
+  }
+
+  &__body {
+    font-size: 13px;
+    color: $c-text-muted;
+    line-height: 1.7;
+  }
+
+  &__item {
+    margin-bottom: 6px;
+  }
+}
+
+// Alerts
+.alert-item {
+  background: $c-bg-subtle;
+  border-radius: 4px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $c-border;
+
+  &--critical {
+    border-left: 3px solid $c-red;
+  }
+
+  &--warning {
+    border-left: 3px solid $c-orange;
+  }
+
+  &__msg {
+    font-size: 14px;
+  }
+
+  &__time {
+    font-size: 13px;
+    color: $c-text-muted;
+    white-space: nowrap;
+    margin-left: 12px;
+  }
+}
+
+// Data validity
+.data-validity {
+  background: $c-bg-subtle;
+  border-radius: 4px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  border: 1px solid $c-border;
+
+  &__item {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  &__value {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__label {
+    font-size: 13px;
+    color: $c-text-muted;
+    margin-top: 4px;
+  }
+}
+
+// Placeholder card
+.placeholder-card {
+  height: 120px;
+  background: $c-bg-subtle;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed $c-border;
+  text-align: center;
+
+  &__title {
+    color: $c-text-muted;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__subtitle {
+    color: $c-text-muted;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+}
+
+// Tier progress
+.tier-progress {
+  margin-bottom: 8px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  &__count {
+    font-weight: 600;
+  }
+
+  &__bar {
+    height: 6px;
+    background: $c-border;
+    border-radius: 3px;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    background: #000;
+    border-radius: 3px;
+  }
+}
+
+// Chart container
+.chart-container {
+  width: 100%;
+  position: relative;
+}
+
+// Tooltip (for Chart.js external tooltip)
+.chart-tooltip {
+  background: #fff;
+  border: 1px solid $c-border;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: $c-text;
+  box-shadow: $shadow-sm;
+  pointer-events: none;
+
+  &__title {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__item {
+    margin-top: 2px;
+  }
+}
+
+// Revenue tooltip (special)
+.rev-tooltip {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: $shadow-md;
+  min-width: 140px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  &__icon {
+    background: #000;
+    border-radius: 24px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $c-text-muted;
+  }
+
+  &__body {
+    background: $c-bg-subtle;
+    border: 1px solid $c-border;
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__data-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: $c-text-muted;
+  }
+
+  &__data-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  &__data-unit {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+  }
+}

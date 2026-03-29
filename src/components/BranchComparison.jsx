@@ -159,6 +159,8 @@ export default function BranchComparison() {
               tickLine={false}
               tick={{ fontSize: 16, fill: "#000", fontWeight: 500 }}
               dy={10}
+              interval="preserveStartEnd"
+              tickCount={8}
             />
             <YAxis
               axisLine={false}

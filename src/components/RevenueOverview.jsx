@@ -241,6 +241,8 @@ export default function RevenueOverview() {
               tickLine={false}
               tick={{ fontSize: 13, fill: "#999", fontWeight: 400 }}
               dy={10}
+              interval="preserveStartEnd"
+              tickCount={8}
             />
             <YAxis
               axisLine={false}

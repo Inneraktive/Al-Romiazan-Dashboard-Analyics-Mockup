@@ -436,7 +436,7 @@ export default function AnalyticsGuide() {
               <linearGradient id="fcBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={C.cyan} stopOpacity={0.18}/><stop offset="100%" stopColor={C.cyan} stopOpacity={0.04}/></linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
             <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={yFmt}/>
             <Tooltip content={<CTip/>}/>
             <Area type="monotone" dataKey={curKey} fill="url(#rg)" stroke="#000" strokeWidth={2} name="2026 (Current)" connectNulls={false}/>
@@ -507,7 +507,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={280}>
       <ComposedChart data={paretoData}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
+        <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
         <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.orange}} tickFormatter={v=>`${v}%`}/>
         <Tooltip content={<CTip/>}/>
@@ -602,7 +602,7 @@ export default function AnalyticsGuide() {
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={branchTrendByMetric[branchMetric][branchTrendYear]} barGap={2} barCategoryGap="25%">
           <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
           <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>branchMetric==="Revenue"?`${(v/1000).toFixed(0)}K`:branchMetric==="ATV"?`${(v/1000).toFixed(1)}K`:v}/>
           <Tooltip content={<CTip forceTextDark/>} cursor={{fill:"rgba(0,0,0,0.03)"}}/>
           {branchLines.map((name,idx)=><Bar key={name} dataKey={name} fill={idx===0?"#000":"#d8d8d8"} radius={[4,4,0,0]} maxBarSize={24}/>)}
@@ -620,7 +620,7 @@ export default function AnalyticsGuide() {
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={branchTrendByMetric[branchMetric][branchTrendYear]}>
           <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+          <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
           <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>branchMetric==="Revenue"?`${(v/1000).toFixed(0)}K`:branchMetric==="ATV"?`${(v/1000).toFixed(1)}K`:v}/>
           <Tooltip content={<CTip/>}/>
           {branchData["2026"].map((b,i)=>branchLines.includes(b.name) && <Line key={b.name} type="monotone" dataKey={b.name} stroke={COLORS[i]} strokeWidth={2} dot={{r:3}}/>)}
@@ -675,10 +675,10 @@ export default function AnalyticsGuide() {
           <BarChart data={shown} layout={shown.length===1?"vertical":"horizontal"} margin={shown.length===1?{left:20}:{}}>
             <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
             {shown.length===1 ? (<>
-              <XAxis type="number" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} tickFormatter={v=>`${v}%`}/>
+              <XAxis type="number" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} tickFormatter={v=>`${v}%`} tickCount={8}/>
               <YAxis type="category" dataKey="branch" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} width={130}/>
             </>) : (<>
-              <XAxis dataKey="branch" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} angle={-20} textAnchor="end" height={50}/>
+              <XAxis dataKey="branch" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} angle={-20} textAnchor="end" height={50} interval="preserveStartEnd" tickCount={8}/>
               <YAxis axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} tickFormatter={v=>`${v}%`}/>
             </>)}
             <Tooltip content={<CTip/>}/>
@@ -744,7 +744,7 @@ export default function AnalyticsGuide() {
         return (
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+            <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
             <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>spMetric==="Revenue"?`${(v/1000).toFixed(0)}K`:v}/>
             <Tooltip content={<CTip/>}/>
             {spLines.map((name,i) => <Line key={name} type="monotone" dataKey={name} stroke={COLORS[i]} strokeWidth={2} dot={{r:3}}/>)}
@@ -763,7 +763,7 @@ export default function AnalyticsGuide() {
     {prodView==="Donut" ? (
       <ResponsiveContainer width="100%" height={250}><PieChart><Pie data={productMix} cx="50%" cy="50%" innerRadius={55} outerRadius={95} paddingAngle={3} dataKey="value" label={({name,value})=>`${name} ${value}%`} labelLine={{stroke:C.textMuted}}>{productMix.map((_,i)=><Cell key={i} fill={COLORS[i]}/>)}</Pie><Tooltip/></PieChart></ResponsiveContainer>
     ) : (
-      <ResponsiveContainer width="100%" height={250}><AreaChart data={productTrend} stackOffset="expand"><CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/><XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/><YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${Math.round(v*100)}%`}/><Tooltip content={<CTip/>}/>{["24K","22K","21K","18K","14K","8K"].map((k,i)=><Area key={k} type="monotone" dataKey={k} stackId="1" fill={COLORS[i]} stroke={COLORS[i]} fillOpacity={0.8}/>)}<Legend wrapperStyle={{ paddingTop: 24 }}/></AreaChart></ResponsiveContainer>
+      <ResponsiveContainer width="100%" height={250}><AreaChart data={productTrend} stackOffset="expand"><CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/><XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/><YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${Math.round(v*100)}%`}/><Tooltip content={<CTip/>}/>{["24K","22K","21K","18K","14K","8K"].map((k,i)=><Area key={k} type="monotone" dataKey={k} stackId="1" fill={COLORS[i]} stroke={COLORS[i]} fillOpacity={0.8}/>)}<Legend wrapperStyle={{ paddingTop: 24 }}/></AreaChart></ResponsiveContainer>
     )}
   </SectionCard>
 
@@ -772,7 +772,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={260}>
       <LineChart data={pricePerGram}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
         <Tooltip content={<CTip/>}/>
         <Line type="monotone" dataKey="sellingPrice" stroke="#000" strokeWidth={2} name="Your Price/g" dot={{r:3}}/>
@@ -788,7 +788,7 @@ export default function AnalyticsGuide() {
       <AreaChart data={weightTrend}>
         <defs><linearGradient id="wGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={C.green} stopOpacity={0.2}/><stop offset="100%" stopColor={C.green} stopOpacity={0.02}/></linearGradient></defs>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>weightUnit==="Troy Oz"?`${(v/31.1).toFixed(0)} oz`:`${v}g`}/>
         <Tooltip content={<CTip/>}/>
         <Area type="monotone" dataKey="grams" fill="url(#wGrad)" stroke={C.green} strokeWidth={2} name={`Weight (${weightUnit})`}/>
@@ -804,7 +804,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={260}>
       <ComposedChart data={customerAcq}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
         {custView==="New + Cumulative" && <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.orange}}/>}
         <Tooltip content={<CTip/>}/>
@@ -834,7 +834,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={240}>
       <BarChart data={clvDistribution}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
+        <XAxis dataKey="range" axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis axisLine={false} tickLine={false} tick={{fontSize:13,fill:C.textMuted}}/>
         <Tooltip content={<CTip/>}/>
         <Bar dataKey="count" fill="#000" radius={[4,4,0,0]} name="Customer Count"/>
@@ -847,7 +847,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={260}>
       <LineChart data={retentionCurve}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${v}%`}/>
         <Tooltip content={<CTip/>}/>
         {(retTier==="All Tiers"||retTier==="Gold") && <Line type="monotone" dataKey="gold" stroke="#000" strokeWidth={2} name="Gold Tier" dot={{r:3}}/>}
@@ -867,7 +867,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={260}>
       <ComposedChart data={cancelTrend}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         {(cancelView==="Rate + Value"||cancelView==="Rate Only") && <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.red}} tickFormatter={v=>`${v}%`}/>}
         {(cancelView==="Rate + Value"||cancelView==="Value Only") && <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>}
         <Tooltip content={<CTip/>}/>
@@ -927,7 +927,7 @@ export default function AnalyticsGuide() {
     <ResponsiveContainer width="100%" height={240}>
       <BarChart data={[{period:"4 Weeks Before",revenue:180000},{period:"During Campaign",revenue:245000},{period:"4 Weeks After",revenue:165000}]}>
         <CartesianGrid strokeDasharray="6 6" stroke={C.border} vertical={false}/>
-        <XAxis dataKey="period" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}}/>
+        <XAxis dataKey="period" axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} interval="preserveStartEnd" tickCount={8}/>
         <YAxis axisLine={false} tickLine={false} tick={{fontSize:14,fill:C.textMuted}} tickFormatter={v=>`${(v/1000).toFixed(0)}K`}/>
         <Tooltip content={<CTip/>}/>
         <Bar dataKey="revenue" radius={[4,4,0,0]} name="Revenue (AED)">{["#d8d8d8","#000","#a0a0a0"].map((c,i)=><Cell key={i} fill={c}/>)}</Bar>
